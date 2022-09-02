@@ -3,15 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package serverwofacade;
-public class ServerWOFacade {
-    public static void main(String[] args) {
-        //ScheduleServer scheduleServer = new ScheduleServer();
-        ServerWFacade facadeObj = ServerWFacade.getMyFacadeObj();
-        facadeObj.startSchedule();
-        facadeObj.stopSchedule();
-	/*
+
+/**
+ *
+ * @author feiyi
+ */
+public class ServerWFacade {
+    private static ServerWFacade myFacadeObj = null;
+    private ServerWFacade(){}
+    public static ServerWFacade getMyFacadeObj() {
+        if (myFacadeObj == null) {
+            myFacadeObj = new ServerWFacade();
+        }
+return myFacadeObj;
+    }
+    
+    public void startSchedule(){
+        ScheduleServer scheduleServer = new ScheduleServer();
         scheduleServer.startBooting();
 	scheduleServer.readSystemConfigFile();
 	scheduleServer.init();
@@ -19,14 +28,15 @@ public class ServerWOFacade {
 	scheduleServer.initializeListeners();
 	scheduleServer.createSystemObjects();
 	System.out.println("Start working......");
-	System.out.println("After work done.........");
+    }
+    public void stopSchedule(){
+        ScheduleServer scheduleServer = new ScheduleServer();
+        System.out.println("After work done.........");
 	scheduleServer.releaseProcesses();
 	scheduleServer.destory();
 	scheduleServer.destroySystemObjects();
 	scheduleServer.destoryListeners();
 	scheduleServer.destoryContext();
 	scheduleServer.shutdown();
-        */
     }
-    
 }
